@@ -21,7 +21,7 @@ import {
   jidDecode,
   DisconnectReason,
 } from "@whiskeysockets/baileys";
-
+import cfonts from 'cfonts';
 import pino from "pino";
 import crypto from 'crypto';
 import chalk from "chalk";
@@ -98,14 +98,18 @@ const userInfoSyt = () => {
     return s;
   }
 
-console.log(chalk.bold.cyan('Made With | Stellar WaBot'))
-console.log(chalk.bold.cyan('Copyright (C) - ') + chalk.bold.red('Alya Bot'))
+cfonts.say('Alya', {
+  font: 'block',
+  align: 'center',
+  colors: ['blue', 'cyan'],
+  gradient: ['magenta', 'yellow']
+})
 
-const ramInGB = os.totalmem() / (1024 * 1024 * 1024)
-const freeRamInGB = os.freemem() / (1024 * 1024 * 1024)
-const currentTime = new Date().toLocaleString()
-const info = `\n╭─────────────────────────────◉\n│ ${chalk.red.bgBlueBright.bold('        🖥 INFORMACIÓN DEL SISTEMA        ')}\n│「 💻 」${chalk.yellow(`SO: ${os.type()}, ${os.release()} - ${os.arch()}`)}\n│「 💾 」${chalk.yellow(`RAM Total: ${ramInGB.toFixed(2)} GB`)}\n│「 💽 」${chalk.yellow(`RAM Libre: ${freeRamInGB.toFixed(2)} GB`)}\n╰─────────────────────────────◉\n\n╭─────────────────────────────◉\n│ ${chalk.red.bgGreenBright.bold('        🟢 INFORMACIÓN DEL BOT        ')}\n│「 🎈 」${chalk.cyan(`Nombre » Alya Bot`)}\n│「 🍒 」${chalk.cyan(`Versión » 1.0 (Beta)`)}\n│「 🍉 」${chalk.cyan(`Descripción » WhatsApp Bot`)}\n│「 🚩 」${chalk.cyan(`Autor » ZyxlJs`)}\n│「 🌿 」${chalk.cyan('Colaboradores » ZyxlJs - Destroy - Legna - Alba070503')}\n╰─────────────────────────────◉\n\n╭─────────────────────────────◉\n│ ${chalk.red.bgMagenta.bold('        ⏰ HORA ACTUAL        ')}\n│「 🕒 」${chalk.magenta(`${currentTime}`)}\n╰─────────────────────────────◉\n`
-console.log(info)
+cfonts.say('Made With Stellar Wa', {
+  font: 'console',
+  align: 'center',
+  colors: ['cyan', 'magenta', 'yellow']
+})
 
 const BOT_TYPES = [
   { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
