@@ -64,12 +64,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 const question = (text) => {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
   return new Promise((resolve) => {
-    rl.question(text, resolve);
+    rl.question(text, (answer) => {
+      resolve(answer.trim());
+    });
   });
 };
 const usePairingCode = true;
@@ -155,11 +153,10 @@ async function startBot() {
   client.ev.on("creds.update", saveCreds)
 
   if (!client.authState.creds.registered) {
-    const phoneNumber = await question(
-      log.warn("Ingrese su número de WhatsApp\n") +
-        log.info("Ejemplo: 57301××××××") +
-      console.log(chalk.yellow('--->'))
-    )
+      log.warn("Ingrese su número de WhatsApp\n")
+       log.info("Ejemplo: 57301××××××")
+        console.log(chalk.yellow('--->'))
+        const phoneNumber = await question("")
     try {
       log.info("Solicitando código de emparejamiento...")
       const pairing = await client.requestPairingCode(phoneNumber)
