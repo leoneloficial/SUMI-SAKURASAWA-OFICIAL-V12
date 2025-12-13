@@ -117,7 +117,7 @@ grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https:/
 ### Patrocinadores del Proyecto
 
 <details>
-<summary><strong>☁️ Stellar API</strong> — Hosting</summary>
+<summary><strong>☁️ Stellar</strong> — API</summary>
 
 <div align="center">
   <a href="https://api.stellarwa.xyz">
