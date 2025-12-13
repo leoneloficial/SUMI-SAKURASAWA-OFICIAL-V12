@@ -36,6 +36,7 @@ No ofrecemos soporte, compatibilidad ni soluciones para ese entorno.
 
 </details>
 
+<details>
 <summary><strong>☃️ Información</strong> — Recomendado</summary>
 
 Evita completamente usar forks, mods o versiones alteradas de Baileys.
