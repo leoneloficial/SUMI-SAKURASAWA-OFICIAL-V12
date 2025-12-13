@@ -24,10 +24,7 @@ https://links.cafirexos.com/whatsapp/canal
 https://cafirexos.com/contactenos
  .  . ︵︵•✿•︵︵ .  ◌Ⳋ𝅄`;
 
-    await client.sendMessage(m.chat, {
-      image: { url: "https://cdn.cafirexos.com/logos/logo_cfros_2000x2000.png" },
-      caption
-    }, { quoted: m });
+        await client.sendContextInfoIndex(m.chat, caption, {}, m, true)
 
   }
 };
