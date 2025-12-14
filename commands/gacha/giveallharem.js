@@ -28,12 +28,6 @@ export default {
       return m.reply('《✧》 El usuario *mencionado* no está *registrado* en el bot')
     }
 
-    chatData.users[mentionedJid] = {
-      characters: [],
-      characterCount: 0,
-      totalRwcoins: 0,
-    }
-
     const fromUser = chatData.users[senderId]
     const toUser = chatData.users[mentionedJid]
 
