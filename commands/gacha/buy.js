@@ -112,7 +112,7 @@ export default {
       )
     }
 
-    chatConfig.users[userId] ||= { characters: [], characterCount: 0, totalRwcoins: 0 }
+   // chatConfig.users[userId] ||= { characters: [], characterCount: 0, totalRwcoins: 0 }
     const userData = chatConfig.users[userId]
 
     if (user.coins < reservedCharacter.value)
@@ -120,7 +120,7 @@ export default {
         `ꕥ No tienes suficiente *${monedas}* para comprar a *${reservedCharacter.name}*.`,
       )
 
-    userData.characters ||= []
+   // userData.characters ||= []
     userData.characters.push({
       name: reservedCharacter.name,
       value: reservedCharacter.value,
