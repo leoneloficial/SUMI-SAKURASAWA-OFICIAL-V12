@@ -1661,5 +1661,12 @@
      "gender": "Mujer",
      "source": "Black Bullet",
      "keyword": "tina_sprout" 
+  },
+  {
+     "name": "Ahiara Enju",
+     "value": "1000",
+     "gender": "Mujer",
+     "source": "Black Bullet",
+     "keyword": "aihara_enju" 
   }
 ]
