@@ -1,7 +1,7 @@
 {
   "name": "alya",
   "version": "1.0",
-  "description": "Bot WhatsApp",
+  "description": "Bot multidevice, hecho para entretener a los usuarios.",
   "main": "index.js",
   "type": "module",
   "scripts": {
