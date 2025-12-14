@@ -41,9 +41,6 @@ const sender = m.sender
   initDB(m, client)
   antilink(client, m)
 
-  // # Función de Prefijo de Sub-Bot hecho por ZyxlJs, su funcion es: NameBot/comando! 
-  // # Ejemplo: Megumin/menu
-
   const from = m.key.remoteJid
   const idDD = client.user.id.split(':')[0] + "@s.whatsapp.net" || ''
   const rawPrefijo = global.db.data.settings[idDD].prefijo || ''
@@ -112,8 +109,6 @@ console.log(`𝄢 · • —– ٠ ✤ ٠ —– • · · • —– ٠ ✤ ٠ 
 }
 const prefixxy = ['/', '#', '!', '-', '+', '.']
 const hasPrefix = prefixxy.some(prefix => m.text?.startsWith(prefix))
-
-// # Función primary hecha por ZyxlJs en base beta!
 
 const chatData = global.db.data.chats[m.chat]
 const botprimaryId = chatData?.primaryBot
