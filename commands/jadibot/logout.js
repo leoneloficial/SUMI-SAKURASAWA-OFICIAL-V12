@@ -5,7 +5,7 @@ import {jidDecode} from '@whiskeysockets/baileys';
 export default {
   command: ['logout'],
   category: 'socket',
-  run: async (client, m, { prefa, msgglobal }) => {
+  run: async (client, m, args, command, text, prefix) => {
     const rawId = client.user?.id || ''
     const decoded = jidDecode(rawId)
     const cleanId = decoded?.user || rawId.split('@')[0]
@@ -32,7 +32,7 @@ export default {
       }, 2000)
 
       setTimeout(() => {
-        m.reply(`《✧》 Sesión finalizada correctamente.\nPuedes reconectarte usando *${prefa}code*`)
+        m.reply(`《✧》 Sesión finalizada correctamente.\nPuedes reconectarte usando *${prefix}code*`)
       }, 3000)
     } catch (err) {
       await m.reply(msgglobal)
