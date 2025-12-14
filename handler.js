@@ -157,19 +157,16 @@ if (botprimaryId && botprimaryId !== selfId) {
 
   if (chat.adminonly && !isAdmins) return
 
- // if (global.comandos.has(command)) {
-    // await client.sendPresenceUpdate('composing', m.chat)
     const cmdData = global.comandos.get(command)
     if (!cmdData) {
-    return
+    await client.readMessages([m.key])
+    return m.reply(`ꕤ El comando *${command}* no existe.\n✎ Usa *${prefix}help* para ver la lista de comandos disponibles.`)
    }
     const comando = m.text.slice(prefix.length);
-if (cmdData && typeof cmdData === 'object' && cmdData.isOwner && !global.owner.map(num => num + '@s.whatsapp.net').includes(sender)
-) { return }
-   if (cmdData && typeof cmdData === 'object' && cmdData.isModeration && !global.mods.map(num => num + '@s.whatsapp.net').includes(sender)
-) { return } 
-if (cmdData && typeof cmdData === 'object' && cmdData.isAdmin && !isAdmins) { return client.reply(m.chat, mess.admin, m) }
-if (cmdData && typeof cmdData === 'object' && cmdData.botAdmin && !isBotAdmins) { return client.reply(m.chat, mess.botAdmin, m) }  
+    if (cmdData.isOwner && !global.owner.map(num => num + '@s.whatsapp.net').includes(sender)) return m.reply(`ꕤ El comando *${command}* no existe.\n✎ Usa *${prefa}help* para ver la lista de comandos disponibles.`)
+    if (cmdData.isModeration && !global.mods.map(num => num + '@s.whatsapp.net').includes(sender)) return m.reply(`ꕤ El comando *${command}* no existe.\n✎ Usa *${prefa}help* para ver la lista de comandos disponibles.`)
+    if (cmdData.isAdmin && !isAdmins) return client.reply(m.chat, mess.admin, m)
+    if (cmdData.botAdmin && !isBotAdmins) return client.reply(m.chat, mess.botAdmin, m)
 
     try {
     await client.readMessages([m.key])
@@ -182,7 +179,7 @@ if (cmdData && typeof cmdData === 'object' && cmdData.botAdmin && !isBotAdmins) 
     user2.name = m.pushName
       await cmdData.run(client, m, args, command, text)
     } catch (error) {
-      await client.sendMessage(m.chat, { text: `🌱 Error al ejecutar el comando\n${error}` }, { quoted: m })
+      await client.sendMessage(m.chat, { text: `☃️ Error al ejecutar el comando` }, { quoted: m })
     }
 
   // valid(client, m, command)
