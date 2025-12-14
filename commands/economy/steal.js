@@ -33,7 +33,7 @@ export default {
         `《✧》 *${db.users[target]?.name || target.split('@')[0]}* no tiene suficiente *${monedas}* para robarle.`,
       )
 
-    senderData.roboCooldown ||= 0
+   // senderData.roboCooldown ||= 0
     const remainingTime = senderData.roboCooldown - Date.now()
 
     if (remainingTime > 0)
