@@ -1,7 +1,7 @@
 export default {
   command: ['ppt'],
   category: 'rpg',
-  run: async (client, m, args) => {
+  run: async (client, m, args, command, text, prefix) => {
     const db = global.db.data
     const chatId = m.chat
     const botId = client.user.id.split(':')[0] + '@s.whatsapp.net'
@@ -23,7 +23,7 @@ export default {
     const userChoice = args[0]?.trim().toLowerCase()
 
     if (!options.includes(userChoice))
-      return m.reply(`《✧》 Usa el comando así:\n› *${prefa}ppt piedra*, *papel* o *tijera*`)
+      return m.reply(`《✧》 Usa el comando así:\n› *${prefix + command} piedra*, *papel* o *tijera*`)
 
     const botChoice = options[Math.floor(Math.random() * options.length)]
     const result = determineWinner(userChoice, botChoice)
