@@ -100,11 +100,37 @@ const isAdmins = m.isGroup ? groupAdmins.some(p => p.phoneNumber === sender || p
   const consolePrimary = fromprimary.primaryBot;
 
   if (!consolePrimary || consolePrimary === client.user.id.split(':')[0] + '@s.whatsapp.net') {
-  const h = chalk.bold.blue('************************************')
-  const v = chalk.bold.white('*')
-  console.log(
-    `\n${h}\n${chalk.bold.yellow(`${v} Fecha: ${chalk.whiteBright(moment().format('DD/MM/YY HH:mm:ss'))}`)}\n${chalk.bold.blueBright(`${v} Usuario: ${chalk.whiteBright(pushname)}`)}\n${chalk.bold.magentaBright(`${v} Remitente: ${gradient('deepskyblue', 'darkorchid')(sender)}`)}\n${m.isGroup ? chalk.bold.cyanBright(`${v} Grupo: ${chalk.greenBright(groupName)}\n${v} ID: ${gradient('violet', 'midnightblue')(from)}\n`) : chalk.bold.greenBright(`${v} Chat privado\n`)}${h}`
-  )}
+
+const BORDER_CHAR = '*';
+const BORDER_LENGTH = 40;
+const h = chalk.bold.hex('#4a90e2')(BORDER_CHAR.repeat(BORDER_LENGTH));
+const v = chalk.bold.hex('#f5f5f5')(BORDER_CHAR);
+const SPACER = ' '; 
+
+console.log(`\n${h}`)
+console.log(chalk.bold.hex('#ffd700')(
+  `${v}${SPACER}Fecha: ${chalk.hex('#ffffff').italic(moment().format('DD/MM/YYYY HH:mm:ss'))}${SPACER.repeat(BORDER_LENGTH - 11 - moment().format('DD/MM/YYYY HH:mm:ss').length)}${v}`
+))
+console.log(chalk.bold.hex('#00ffff')(
+  `${v}${SPACER}Usuario: ${chalk.hex('#ffffff').bold(pushname)}${SPACER.repeat(BORDER_LENGTH - 12 - pushname.length)}${v}`
+))
+console.log(chalk.bold.hex('#ff69b4')(
+  `${v}${SPACER}Remitente: ${gradient.rainbow(sender)}${SPACER.repeat(BORDER_LENGTH - 14 - sender.length)}${v}`
+))
+
+if (m.isGroup) {
+  console.log(chalk.bold.hex('#32cd32')(
+    `${v}${SPACER}Grupo: ${chalk.hex('#ffffff').italic(groupName)}${SPACER.repeat(BORDER_LENGTH - 10 - groupName.length)}${v}`
+  ));
+  console.log(chalk.bold.hex('#9370db')(
+    `${v}${SPACER}ID Grupo: ${gradient.purpleBlue(from)}${SPACER.repeat(BORDER_LENGTH - 13 - from.length)}${v}`
+  ))
+} else {
+  console.log(chalk.bold.hex('#32cd32')(
+    `${v}${SPACER}Tipo de chat: ${chalk.hex('#ffffff').bold('Privado')}${SPACER.repeat(BORDER_LENGTH - 17 - 7)}${v}`
+  ))
+}
+console.log(h)
 const prefixxy = ['/', '#', '!', '-', '+', '.']
 const hasPrefix = prefixxy.some(prefix => m.text?.startsWith(prefix))
 
