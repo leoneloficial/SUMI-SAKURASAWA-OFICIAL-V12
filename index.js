@@ -99,18 +99,34 @@ const userInfoSyt = () => {
     return s;
   }
 
-cfonts.say('Alya', {
-  font: 'block',
-  align: 'center',
-  colors: ['blue', 'cyan'],
-  gradient: ['magenta', 'yellow']
+const { name, author, version, description, collaborators } = require(join(__dirname, './package.json')) 
+const { say } = cfonts
+
+const subtitleStyle = chalk.white.bold
+const responseStyle = chalk.dim.bold
+
+let activeCollaborators = ''
+for (const key in collaborators) {
+if (collaborators.hasOwnProperty(key)) {
+activeCollaborators += collaborators[key] + ', '
+}}
+activeCollaborators = activeCollaborators.slice(0, -2)
+
+say('alya san', {
+align: 'center',           
+gradient: ['red', 'blue'] 
+})
+say(description, {
+font: 'console',
+align: 'center',
+gradient: ['blue', 'magenta']
 })
 
-cfonts.say('Made With Stellar Wa', {
-  font: 'console',
-  align: 'center',
-  colors: ['cyan', 'magenta', 'yellow']
-})
+const message = `${subtitleStyle('Desarrollado por »')} ${responseStyle(author.name)}
+${subtitleStyle('Código basado por »')} ${responseStyle(collaborators.col1)}
+${subtitleStyle('Colaboradores activos »')} ${responseStyle(activeCollaborators)}
+${subtitleStyle('Versión »')} ${responseStyle(version)}`
+console.log(boxen(message, { padding: 1, margin: 1, borderStyle: 'double', borderColor: 'blue', float: 'center', }))
 
 const BOT_TYPES = [
   { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
