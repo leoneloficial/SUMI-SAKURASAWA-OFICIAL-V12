@@ -1,25 +1,25 @@
 export default {
   command: ['setbirth'],
   category: 'profile',
-  run: async (client, m, args) => {
+  run: async (client, m, args, command, text, prefix) => {
     const user = global.db.data.users[m.sender]
     const currentYear = new Date().getFullYear()
     const input = args.join(' ')
 
     if (user.birth)
       return m.reply(
-        `《✧》 Ya tienes una fecha establecida. Usa › *${prefa}delbirth* para eliminarla.`,
+        `《✧》 Ya tienes una fecha establecida. Usa › *${prefix}delbirth* para eliminarla.`,
       )
 
     if (!input)
       return m.reply(
         '《✧》 Debes ingresar una fecha válida.\n\n`Ejemplo`' +
-          `\n${prefa}setbirth *01/01/2000*\n${prefa}setbirth *01/01*`,
+          `\n${prefix + command} *01/01/2000*\n${prefix + command} *01/01*`,
       )
 
     const birth = validarFechaNacimiento(input, currentYear, 'setbirth')
     if (!birth || birth.includes('El año no puede ser mayor'))
-      return m.reply(birth || `《✧》 Fecha inválida. Usa › *${prefa}setbirth 01/01/2000*`)
+      return m.reply(birth || `《✧》 Fecha inválida. Usa › *${prefix + command} 01/01/2000*`)
 
     user.birth = birth
     return m.reply(`✎ Se ha establecido tu fecha de nacimiento como: *${user.birth}*`)
