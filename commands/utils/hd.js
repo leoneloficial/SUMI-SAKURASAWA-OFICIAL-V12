@@ -9,7 +9,7 @@ export default {
       const q = m.quoted || m
       const mime = q.mimetype || q.msg?.mimetype || ''
 
-      if (!mime) return m.reply(`《✧》 Envía una *imagen* junto al *comando* ${prefix}hd`)
+      if (!mime) return m.reply(`《✧》 Envía una *imagen* junto al *comando* ${prefix + command}`)
       if (!/image\/(jpe?g|png)/.test(mime)) {
         return m.reply(`《✧》 El formato *${mime}* no es compatible`)
       }
