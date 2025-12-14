@@ -273,7 +273,8 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
 .꒷🌳.𖦹˙ /translate + _<idioma>_ + _<text>_
 .꒷🌳.𖦹˙ /get + _<url>_
 .꒷🌳.𖦹˙ /setmeta + _<packname> | <author>_
-.꒷🌳.𖦹˙ /hd 
+.꒷🌳.𖦹˙ /hd
+.꒷🌳.𖦹˙ /tourl
 
 > *$namebot está siendo alojado desde cafirexos.com, si quieres más información usa /cafi* ૮(˶ᵔᵕᵔ˶)ა`.trim();
 
