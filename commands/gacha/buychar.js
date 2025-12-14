@@ -40,10 +40,10 @@ export default {
 
     const vendedorId = personaje.vendedor
     const vendedor = chatData.users[vendedorId]
-    vendedor.coins ||= 0
+  //  vendedor.coins ||= 0
     vendedor.coins += personaje.precio
 
-    user.characters ||= []
+   // user.characters ||= []
     user.characters.push({ name: personaje.name, ...personaje })
 
     vendedor.personajesEnVenta = vendedor.personajesEnVenta?.filter(
