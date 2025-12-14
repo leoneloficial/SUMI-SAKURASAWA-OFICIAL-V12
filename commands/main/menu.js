@@ -122,34 +122,34 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
 .꒷🌳.𖦹˙ $prefixcuddle + _<mention>_
 
  .  . ︵ *ᴅᴏᴡɴʟᴏᴀᴅs*.  ◌Ⳋ𝅄
-.꒷🌳.𖦹˙ $prefixfacebook › $prefixfb + _<url>_
-.꒷🌳.𖦹˙ $prefixmediafire › $prefixmf + _<query|url>_
-.꒷🌳.𖦹˙ $prefixgdrive › $prefixdrive + _<url>_
-.꒷🌳.𖦹˙ $prefixinstagram › $prefixig + _<url>_
-.꒷🌳.𖦹˙ $prefixtiktok › $prefixtt + _<url|query>_
-.꒷🌳.𖦹˙ $prefixplay › $prefixmp3 › $prefixplayaudio › $prefixytaudio › $prefixytmp3 + _<url|query>_
-.꒷🌳.𖦹˙ $prefixplay2 › $prefixmp4 › $prefixplayvideo › $prefixytvideo › $prefixytmp4 + _<url|query>_
+.꒷🎅.𖦹˙ $prefixfacebook › $prefixfb + _<url>_
+.꒷🎅.𖦹˙ $prefixmediafire › $prefixmf + _<query|url>_
+.꒷🎅.𖦹˙ $prefixgdrive › $prefixdrive + _<url>_
+.꒷🎅.𖦹˙ $prefixinstagram › $prefixig + _<url>_
+.꒷🎅.𖦹˙ $prefixtiktok › $prefixtt + _<url|query>_
+.꒷🎅.𖦹˙ $prefixplay › $prefixmp3 › $prefixplayaudio › $prefixytaudio › $prefixytmp3 + _<url|query>_
+.꒷🎅.𖦹˙ $prefixplay2 › $prefixmp4 › $prefixplayvideo › $prefixytvideo › $prefixytmp4 + _<url|query>_
 
  .  . ︵ *ᴇᴄᴏɴᴏᴍɪᴀ*.  ◌Ⳋ𝅄
-.꒷🌳.𖦹˙ $prefixbalance › $prefixbal + _<mention>_
-.꒷🌳.𖦹˙ $prefixsteal › $prefixrob › $prefixrobar + _<mention>_
-.꒷🌳.𖦹˙ $prefixcrime 
-.꒷🌳.𖦹˙ $prefixritual 
-.꒷🌳.𖦹˙ $prefixgivecoins › $prefixpay › $prefixcoinsgive + _<cantidad|all>_ + _<mention>_
-.꒷🌳.𖦹˙ $prefixppt + _<piedra|papel|tijera>_
-.꒷🌳.𖦹˙ $prefixwaittimes › $prefixcooldowns › $prefixeconomyinfo › $prefixeinfo 
-.꒷🌳.𖦹˙ $prefixeconomyboard › $prefixbaltop › $prefixeboard + _<página>_
-.꒷🌳.𖦹˙ $prefixslut 
-.꒷🌳.𖦹˙ $prefixmine 
-.꒷🌳.𖦹˙ $prefixrt › $prefixroulette › $prefixruleta + _<cantidad>_ + _<red|black|green>_
-.꒷🌳.𖦹˙ $prefixcoinflip › $prefixflip › $prefixcf + _<bet>_
-.꒷🌳.𖦹˙ $prefixdaily 
-.꒷🌳.𖦹˙ $prefixmonthly › $prefixmensual 
-.꒷🌳.𖦹˙ $prefixweekly › $prefixsemanal 
-.꒷🌳.𖦹˙ $prefixwork › $prefixw 
-.꒷🌳.𖦹˙ $prefixmath › $prefixmatematicas + _<dificultad>_
-.꒷🌳.𖦹˙ $prefixdeposit › $prefixdep › $prefixd + _<cantidad|all>_
-.꒷🌳.𖦹˙ $prefixwithdraw › $prefixwith + _<cantidad|all>_
+.꒷☃️.𖦹˙ $prefixbalance › $prefixbal + _<mention>_
+.꒷☃️.𖦹˙ $prefixsteal › $prefixrob › $prefixrobar + _<mention>_
+.꒷☃️.𖦹˙ $prefixcrime 
+.꒷☃️.𖦹˙ $prefixritual 
+.꒷☃️.𖦹˙ $prefixgivecoins › $prefixpay › $prefixcoinsgive + _<cantidad|all>_ + _<mention>_
+.꒷☃️.𖦹˙ $prefixppt + _<piedra|papel|tijera>_
+.꒷☃️.𖦹˙ $prefixwaittimes › $prefixcooldowns › $prefixeconomyinfo › $prefixeinfo 
+.꒷☃️.𖦹˙ $prefixeconomyboard › $prefixbaltop › $prefixeboard + _<página>_
+.꒷☃️.𖦹˙ $prefixslut 
+.꒷☃️.𖦹˙ $prefixmine 
+.꒷☃️.𖦹˙ $prefixrt › $prefixroulette › $prefixruleta + _<cantidad>_ + _<red|black|green>_
+.꒷☃️.𖦹˙ $prefixcoinflip › $prefixflip › $prefixcf + _<bet>_
+.꒷☃️.𖦹˙ $prefixdaily 
+.꒷☃️.𖦹˙ $prefixmonthly › $prefixmensual 
+.꒷☃️.𖦹˙ $prefixweekly › $prefixsemanal 
+.꒷☃️.𖦹˙ $prefixwork › $prefixw 
+.꒷☃️.𖦹˙ $prefixmath › $prefixmatematicas + _<dificultad>_
+.꒷☃️.𖦹˙ $prefixdeposit › $prefixdep › $prefixd + _<cantidad|all>_
+.꒷☃️.𖦹˙ $prefixwithdraw › $prefixwith + _<cantidad|all>_
 
  .  . ︵ *ɢᴀᴄʜᴀ*.  ◌Ⳋ𝅄
 .꒷🌳.𖦹˙ $prefixrw › $prefixroll › $prefixrollwaifu › $prefixrf 
