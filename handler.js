@@ -122,7 +122,7 @@ const c={
   wi:chalk.hex('#ffffff'),
   it:chalk.italic,
   bo:chalk.bold
-}
+}}
 const prefixxy = ['/', '#', '!', '-', '+', '.']
 const hasPrefix = prefixxy.some(prefix => m.text?.startsWith(prefix))
 
