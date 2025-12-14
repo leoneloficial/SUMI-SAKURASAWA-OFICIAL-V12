@@ -25,7 +25,7 @@ const generarProblema = (dificultad) => {
   };
 };
 
-async function run(client, m, args, command, text, prefix) => {
+async function run(client, m, args, command, text, prefix) {
   const chatId = m.chat;
   const db = global.db.data.chats[chatId];
   const user = global.db.data.users[m.sender]
