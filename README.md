@@ -53,6 +53,25 @@ Si editas el bot, debes mantener los créditos principales y no borrarlos bajo n
 </details>
 
 ---
+## AlyaBot-MD Disponible en Cafirexos
+
+<a href="https://cafirexos.com">
+  <img width="180px" src="https://cdn.cafirexos.com/logos/logo_cfros_2000x2000.png"/>
+</a>
+
+<details>
+ <summary><b>:paperclip: Enlaces Importantes</b></summary>
+
+- [Sitio web](https://cafirexos.com/)
+- [Área de clientes](https://cafirexos.com/clientarea.php)
+- [Panel de control](https://panel.cafirexos.com)
+- [Base de conocimientos](https://cafirexos.com/knowledgebase)
+- [Estado de los servicios](https://estado.cafirexos.com)
+- [Canal de WhatsApp](https://links.cafirexos.com/whatsapp/canal)
+- [Soporte](https://cafirexos.com/contactenos)
+
+</details>
+---
 
 ### Patrocinadores del Proyecto
 
