@@ -5,7 +5,7 @@ const findCharacterByName = (name, characters) => {
 export default {
   command: ['trade', 'cambiar'],
   category: 'gacha',
-  run: async (client, m, args) => {
+  run: async (client, m, args, command, text, prefix) => {
     const db = global.db.data
     const chatId = m.chat
     const userId = m.sender
@@ -23,7 +23,7 @@ export default {
       .map((s) => s.trim())
     if (partes.length !== 2)
       return m.reply(
-        `✎ Usa el formato correcto:\n› *${prefa}trade Tu personaje / Personaje del otro usuario*`,
+        `✎ Usa el formato correcto:\n› *${prefix + command} Tu personaje / Personaje del otro usuario*`,
       )
 
     const [personaje1Nombre, personaje2Nombre] = partes
