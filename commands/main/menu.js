@@ -152,47 +152,47 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
 .꒷☃️.𖦹˙ $prefixwithdraw › $prefixwith + _<cantidad|all>_
 
  .  . ︵ *ɢᴀᴄʜᴀ*.  ◌Ⳋ𝅄
-.꒷🌳.𖦹˙ $prefixrw › $prefixroll › $prefixrollwaifu › $prefixrf 
-.꒷🌳.𖦹˙ $prefixc › $prefixclaim › $prefixbuy + _<waifu>_
-.꒷🌳.𖦹˙ $prefixharem › $prefixmiswaifus › $prefixclaims 
-.꒷🌳.𖦹˙ $prefixsell › $prefixvender + _<waifu>_ + _<value>_
-.꒷🌳.𖦹˙ $prefixbuyc › $prefixbuycharacter › $prefixbuychar + _<waifu>_
-.꒷🌳.𖦹˙ $prefixtrade › $prefixcambiar + _<tu personaje $prefix personaje 2>_
-.꒷🌳.𖦹˙ $prefixanimelist › $prefixslist › $prefixserielist 
-.꒷🌳.𖦹˙ $prefixanimeinfo › $prefixainfo › $prefixserieinfo + _<anime>_
-.꒷🌳.𖦹˙ $prefixtiendawaifus › $prefixwshop › $prefixharemshop 
-.꒷🌳.𖦹˙ $prefixdeletechar › $prefixdelwaifu › $prefixdelchar + _<waifu>_
-.꒷🌳.𖦹˙ $prefixremoverventa › $prefixremovesale + _<waifu>_
-.꒷🌳.𖦹˙ $prefixgivechar › $prefixregalar › $prefixgivewaifu + _<mention>_ + _<waifu>_
-.꒷🌳.𖦹˙ $prefixgiveallharem + _<mention>_
-.꒷🌳.𖦹˙ $prefixginfo › $prefixinfogacha › $prefixgachainfo 
-.꒷🌳.𖦹˙ $prefixwinfo › $prefixcharinfo › $prefixcinfo + _<waifu>_
-.꒷🌳.𖦹˙ $prefixwimage › $prefixcharimage › $prefixcimage + _<waifu>_
-.꒷🌳.𖦹˙ $prefixvote › $prefixvotar + _<waifu>_
-.꒷🌳.𖦹˙ $prefixaccepttrade › $prefixaceptarintercambio + _<solicitud>_
-.꒷🌳.𖦹˙ $prefixwaifusboard › $prefixtopwaifus › $prefixwaifustop + _<mention>_
+.꒷🎄.𖦹˙ $prefixrw › $prefixroll › $prefixrollwaifu › $prefixrf 
+.꒷🎄.𖦹˙ $prefixc › $prefixclaim › $prefixbuy + _<waifu>_
+.꒷🎄.𖦹˙ $prefixharem › $prefixmiswaifus › $prefixclaims 
+.꒷🎄.𖦹˙ $prefixsell › $prefixvender + _<waifu>_ + _<value>_
+.꒷🎄.𖦹˙ $prefixbuyc › $prefixbuycharacter › $prefixbuychar + _<waifu>_
+.꒷🎄.𖦹˙ $prefixtrade › $prefixcambiar + _<tu personaje $prefix personaje 2>_
+.꒷🎄.𖦹˙ $prefixanimelist › $prefixslist › $prefixserielist 
+.꒷🎄.𖦹˙ $prefixanimeinfo › $prefixainfo › $prefixserieinfo + _<anime>_
+.꒷🎄.𖦹˙ $prefixtiendawaifus › $prefixwshop › $prefixharemshop 
+.꒷🎄.𖦹˙ $prefixdeletechar › $prefixdelwaifu › $prefixdelchar + _<waifu>_
+.꒷🎄.𖦹˙ $prefixremoverventa › $prefixremovesale + _<waifu>_
+.꒷🎄.𖦹˙ $prefixgivechar › $prefixregalar › $prefixgivewaifu + _<mention>_ + _<waifu>_
+.꒷🎄.𖦹˙ $prefixgiveallharem + _<mention>_
+.꒷🎄.𖦹˙ $prefixginfo › $prefixinfogacha › $prefixgachainfo 
+.꒷🎄.𖦹˙ $prefixwinfo › $prefixcharinfo › $prefixcinfo + _<waifu>_
+.꒷🎄.𖦹˙ $prefixwimage › $prefixcharimage › $prefixcimage + _<waifu>_
+.꒷🎄.𖦹˙ $prefixvote › $prefixvotar + _<waifu>_
+.꒷🎄.𖦹˙ $prefixaccepttrade › $prefixaceptarintercambio + _<solicitud>_
+.꒷🎄.𖦹˙ $prefixwaifusboard › $prefixtopwaifus › $prefixwaifustop + _<mention>_
 
  .  . ︵ *ɢʀᴜᴘᴏ*.  ◌Ⳋ𝅄
-.꒷🌳.𖦹˙ $prefixbot + _<on|off>_
-.꒷🌳.𖦹˙ $prefixpromote + _<mention>_
-.꒷🌳.𖦹˙ $prefixdemote + _<mention>_
-.꒷🌳.𖦹˙ $prefixsetprimary + _<mention>_
-.꒷🌳.𖦹˙ $prefixwarn + _<mention>_ + _<razón>_
-.꒷🌳.𖦹˙ $prefixwarns + _<mention>_
-.꒷🌳.𖦹˙ $prefixdelwarn + _<mention> <número|all>_
-.꒷🌳.𖦹˙ $prefixsetwarnlimit + _<número>_
-.꒷🌳.𖦹˙ $prefixclear + _<delete|views>_
-.꒷🌳.𖦹˙ $prefixsetgpbaner 
-.꒷🌳.𖦹˙ $prefixsetgpname + _<text>_
-.꒷🌳.𖦹˙ $prefixsetgpdesc + _<text>_
-.꒷🌳.𖦹˙ $prefixcloset › $prefixopen 
-.꒷🌳.𖦹˙ $prefixwelcome › $prefixbienvenidas › $prefixalerts › $prefixalertas › $prefixgacha › $prefixrpg › $prefixeconomy › $prefixeconomia › $prefixadminonly › $prefixonlyadmin › $prefixantilinks › $prefixantilink › $prefixantienlaces + _<on|off>_
-.꒷🌳.𖦹˙ $prefixgroupinfo › $prefixgp 
-.꒷🌳.𖦹˙ $prefixtag › $prefixhidetag + _<text>_
-.꒷🌳.𖦹˙ $prefixkick + _<mention>_
+.꒷🌟.𖦹˙ $prefixbot + _<on|off>_
+.꒷🌟.𖦹˙ $prefixpromote + _<mention>_
+.꒷🌟.𖦹˙ $prefixdemote + _<mention>_
+.꒷🌟.𖦹˙ $prefixsetprimary + _<mention>_
+.꒷🌟.𖦹˙ $prefixwarn + _<mention>_ + _<razón>_
+.꒷🌟.𖦹˙ $prefixwarns + _<mention>_
+.꒷🌟.𖦹˙ $prefixdelwarn + _<mention> <número|all>_
+.꒷🌟.𖦹˙ $prefixsetwarnlimit + _<número>_
+.꒷🌟.𖦹˙ $prefixclear + _<delete|views>_
+.꒷🌟.𖦹˙ $prefixsetgpbaner 
+.꒷🌟.𖦹˙ $prefixsetgpname + _<text>_
+.꒷🌟.𖦹˙ $prefixsetgpdesc + _<text>_
+.꒷🌟.𖦹˙ $prefixcloset › $prefixopen 
+.꒷🌟.𖦹˙ $prefixwelcome › $prefixbienvenidas › $prefixalerts › $prefixalertas › $prefixgacha › $prefixrpg › $prefixeconomy › $prefixeconomia › $prefixadminonly › $prefixonlyadmin › $prefixantilinks › $prefixantilink › $prefixantienlaces + _<on|off>_
+.꒷🌟.𖦹˙ $prefixgroupinfo › $prefixgp 
+.꒷🌟.𖦹˙ $prefixtag › $prefixhidetag + _<text>_
+.꒷🌟.𖦹˙ $prefixkick + _<mention>_
 
  .  . ︵ *ɪᴀ*.  ◌Ⳋ𝅄
-.꒷🌳.𖦹˙ $prefixia › $prefixchatgpt + _<query>_
+.꒷🌟.𖦹˙ $prefixia › $prefixchatgpt + _<query>_
 
  .  . ︵ *ɪɴғᴏ*.  ◌Ⳋ𝅄
 .꒷🌳.𖦹˙ $prefixallmenu › $prefixmenu › $prefixhelp + _<category>_
