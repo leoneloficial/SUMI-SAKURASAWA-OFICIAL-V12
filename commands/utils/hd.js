@@ -4,7 +4,7 @@ import FormData from 'form-data';
 export default {
   command: ['hd'],
   category: 'utils',
-  run: async (client, m, args, prefix) => {
+  run: async (client, m, args, command, prefix) => {
     try {
       const q = m.quoted || m
       const mime = q.mimetype || q.msg?.mimetype || ''
