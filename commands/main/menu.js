@@ -258,6 +258,7 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
 .꒷🌳.𖦹˙ /setbanner › /setmenubanner
 .꒷🌳.𖦹˙ /seticon
 .꒷🌳.𖦹˙ /setbotprefix + _<value>_
+.꒷🌳.𖦹˙ /setlink + _<value>_
 .꒷🌳.𖦹˙ /setbotcurrency + _<value>_
 .꒷🌳.𖦹˙ /setbotowner + _<value>_
 .꒷🌳.𖦹˙ /setchannel + _<value>_
