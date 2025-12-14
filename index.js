@@ -26,7 +26,7 @@ import pino from "pino";
 import crypto from 'crypto';
 import chalk from "chalk";
 import fs from "fs";
-import path from "path";
+import path, { dirname } from "path";
 import boxen from 'boxen';
 import readline from "readline";
 import os from "os";
