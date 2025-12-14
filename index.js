@@ -10,6 +10,9 @@
  # ------------- √ × -------------
 */
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 import "./settings.js"
 import handler from './handler.js'
 import events from './commands/events.js'
@@ -34,18 +37,29 @@ import path from "path";
 import boxen from 'boxen';
 import readline from "readline";
 import os from "os";
-import parsePhoneNumber from "awesome-phonenumber";
-import { exec, execSync } from "child_process";
-import moment from 'moment-timezone';
+import { execSync } from "child_process";
 
-const BOT_NAME = "Alya San";
-const BOT_DESCRIPTION = "WhatsApp Bot";
-const SESSIONS_DIR = path.join(process.cwd(), "Sessions");
-const OWNER_SESSION_DIR = path.join(SESSIONS_DIR, "Owner");
-const SUBBOTS_SESSION_DIR = path.join(SESSIONS_DIR, "Subs");
-const BROWSER_CONFIG = Browsers.macOS("Chrome");
-const RECONNECT_DELAY = 2500;
-const LOAD_BOTS_INTERVAL = 60 * 1000;
+const BOT_NAME = process.env.BOT_NAME || "Alya San"
+const BOT_DESCRIPTION = process.env.BOT_DESCRIPTION || "WhatsApp Bot"
+const SESSIONS_DIR = path.resolve(process.env.SESSIONS_DIR || "./Sessions")
+const OWNER_SESSION_DIR = path.resolve(process.env.OWNER_SESSION_DIR || "./Sessions/Owner")
+const SUBBOTS_SESSION_DIR = path.resolve(process.env.SUBBOTS_SESSION_DIR || "./Sessions/Subs")
+const BROWSER_OS = process.env.BROWSER_OS || "macOS"
+const BROWSER_NAME = process.env.BROWSER_NAME || "Chrome"
+const RECONNECT_DELAY = parseInt(process.env.RECONNECT_DELAY) || 2500
+const LOAD_BOTS_INTERVAL = parseInt(process.env.LOAD_BOTS_INTERVAL) || 60000
+const KEEP_ALIVE_INTERVAL = parseInt(process.env.KEEP_ALIVE_INTERVAL) || 45000
+const MAX_IDLE_TIME = parseInt(process.env.MAX_IDLE_TIME) || 60000
+const LOGO_GRADIENT_1 = process.env.LOGO_GRADIENT_1 || "red"
+const LOGO_GRADIENT_2 = process.env.LOGO_GRADIENT_2 || "blue"
+const DESC_GRADIENT_1 = process.env.DESC_GRADIENT_1 || "blue"
+const DESC_GRADIENT_2 = process.env.DESC_GRADIENT_2 || "magenta"
+const ALERT_OLD_VERSION = process.env.ALERT_OLD_VERSION === "false" ? false : true
+
+const BROWSER_CONFIG = Browsers[BROWSER_OS] 
+  ? Browsers[BROWSER_OS](BROWSER_NAME) 
+  : Browsers.macOS("Chrome")
+
 const BOT_TYPES = [
   { name: "SubBot", folder: SUBBOTS_SESSION_DIR, starter: startSubBot },
 ];
@@ -55,12 +69,6 @@ const log = {
   success: (msg) => console.log(chalk.bgGreen.white.bold("SUCCESS"), chalk.greenBright(msg)),
   warn: (msg) => console.log(chalk.bgYellowBright.blueBright.bold("WARNING"), chalk.yellow(msg)),
   error: (msg) => console.log(chalk.bgRed.white.bold("ERROR"), chalk.redBright(msg)),
-};
-
-const printLabeledValue = (label, value) => {
-  console.log(
-    `${chalk.green.bold("║")} ${chalk.cyan.bold(label.padEnd(16))}${chalk.magenta.bold(":")} ${value}`
-  );
 };
 
 const getUserName = () => {
@@ -98,7 +106,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, (ans) => r
 const createClient = async (sessionName = OWNER_SESSION_DIR) => {
   const { state, saveCreds } = await useMultiFileAuthState(sessionName);
   const { version, isLatest } = await fetchLatestBaileysVersion();
-  if (!isLatest) console.log(`⚠️  Versión de Baileys no es la última (actual: ${version.join(".")})`);
+  if (ALERT_OLD_VERSION && !isLatest) console.log(`⚠️  Versión de Baileys no es la última (actual: ${version.join(".")})`);
   const logger = pino({ level: "silent" });
   const client = makeWASocket({
     version,
@@ -112,8 +120,8 @@ const createClient = async (sessionName = OWNER_SESSION_DIR) => {
     generateHighQualityLinkPreview: true,
     syncFullHistory: false,
     getMessage: async () => "",
-    keepAliveIntervalMs: 45000,
-    maxIdleTimeMs: 60000,
+    keepAliveIntervalMs: KEEP_ALIVE_INTERVAL,
+    maxIdleTimeMs: MAX_IDLE_TIME,
   });
   client.ev.on("creds.update", saveCreds);
   client.sendText = async (jid, text, quoted = "", options = {}) => {
@@ -125,7 +133,7 @@ const createClient = async (sessionName = OWNER_SESSION_DIR) => {
 
 const handleConnection = async (client) => {
   client.ev.on("connection.update", async (update) => {
-    const { qr, connection, lastDisconnect, isNewLogin, receivedPendingNotifications } = update;
+    const { connection, lastDisconnect, isNewLogin, receivedPendingNotifications } = update;
 
     if (connection === "close") {
       const reason = lastDisconnect?.error?.output?.statusCode || 0;
@@ -236,8 +244,8 @@ const loadDatabase = async () => {
 };
 
 const { say } = cfonts;
-say(BOT_NAME, { align: "center", gradient: ["red", "blue"] });
-say(BOT_DESCRIPTION, { font: "console", align: "center", gradient: ["blue", "magenta"] });
+say(BOT_NAME, { align: "center", gradient: [LOGO_GRADIENT_1, LOGO_GRADIENT_2] });
+say(BOT_DESCRIPTION, { font: "console", align: "center", gradient: [DESC_GRADIENT_1, DESC_GRADIENT_2] });
 
 global.conns = global.conns || [];
 const reconnecting = new Set();
