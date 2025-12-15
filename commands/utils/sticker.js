@@ -1,6 +1,4 @@
-import fs from 'fs'
-import { execSync } from 'child_process'
-import path from 'path'
+import { spawn } from 'child_process'
 
 export default {
 command: ['sticker', 's'],
@@ -11,57 +9,59 @@ try {
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 
-let user = globalThis.db.data.users[m.sender];
-const name = user.name;
-let text1 = user.metadatos || `S'ᴛᴇʟʟᴀʀ 🧠 WᴀBᴏᴛ`;
-let text2 = user.metadatos2 || `@${name}`;
+let user = globalThis.db.data.users[m.sender]
+const name = user.name
+let text1 = user.metadatos || `S'ᴛᴇʟʟᴀʀ 🧠 WᴀBᴏᴛ`
+let text2 = user.metadatos2 || `@${name}`
 
 if (mime === 'image/webp') {
-    const media = await quoted.download()
+const input = await quoted.download()
 
+const ff = spawn('ffmpeg', [
+'-i', 'pipe:0',
+'-movflags', 'faststart',
+'-pix_fmt', 'yuv420p',
+'-f', 'mp4',
+'pipe:1'
+])
 
-    const tmpWebp = path.join(process.cwd(), 'tmp_input.webp')
-    const tmpMp4 = path.join(process.cwd(), 'tmp_output.mp4')
+let buffer = Buffer.alloc(0)
 
-    fs.writeFileSync(tmpWebp, media)
+ff.stdout.on('data', chunk => {
+buffer = Buffer.concat([buffer, chunk])
+})
 
-    execSync(`ffmpeg -y -i "${tmpWebp}" -movflags faststart -pix_fmt yuv420p "${tmpMp4}"`)
+ff.stdin.write(input)
+ff.stdin.end()
 
-    let encmedia = await client.sendVideoAsSticker(
-        m.chat,
-        fs.readFileSync(tmpMp4),
-        m,
-        { packname: text1, author: text2 }
-    )
+ff.on('close', async () => {
+await client.sendVideoAsSticker(
+m.chat,
+buffer,
+m,
+{ packname: text1, author: text2 }
+)
+})
 
-    fs.unlinkSync(tmpWebp)
-    fs.unlinkSync(tmpMp4)
-
-    return
+return
 }
 
 if (/image/.test(mime)) {
-    const media = await quoted.download()
-    let encmedia = await client.sendImageAsSticker(m.chat, media, m, { packname: text1, author: text2 })
-    fs.unlinkSync(encmedia)
-    return
+const media = await quoted.download()
+let enc = await client.sendImageAsSticker(m.chat, media, m, { packname: text1, author: text2 })
+return
 }
 
 if (/video/.test(mime)) {
-    if ((quoted.msg || quoted).seconds > 20) {
-        return m.reply('ꕥ El video no puede ser muy largo')
-    }
-
-    const media = await quoted.download()
-    let encmedia = await client.sendVideoAsSticker(m.chat, media, m, { packname: text1, author: text2 })
-    await new Promise(r => setTimeout(r, 2000))
-    fs.unlinkSync(encmedia)
-    return
+if ((quoted.msg || quoted).seconds > 20) return m.reply('ꕥ El video no puede ser muy largo')
+const media = await quoted.download()
+let enc = await client.sendVideoAsSticker(m.chat, media, m, { packname: text1, author: text2 })
+return
 }
 
 return client.reply(m.chat, '✐ Por favor, envia una imagen, video o sticker animado.', m)
 
 } catch (e) {
-    m.reply('Error: ' + e)
+m.reply('Error: ' + e)
 }}
-};
+}
