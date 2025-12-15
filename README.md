@@ -68,6 +68,35 @@ Ninguna réplica, modificación o derivado externo tiene relación con mi trabaj
 
 ---
 
+### Instalación en CloudShell
+
+<details>
+<summary><strong>🦦 Cloud</strong> — Shell</summary>
+
+```bash
+git clone https://github.com/DevZyxlJs/AlyaBot-MD
+```
+
+```bash
+cd AlyaBot-MD
+```
+
+```bash
+yarn install
+```
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+</details>
+
+---
+
 ### Patrocinadores del Proyecto
 
 <details>
