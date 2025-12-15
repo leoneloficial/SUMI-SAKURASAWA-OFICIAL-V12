@@ -102,7 +102,7 @@ const tipo = mimeTypes[ext.toLowerCase()] || 'application/octet-stream';
         redes: global.db.data.settings[client.user.id.split(':')[0] + "@s.whatsapp.net"].link,
       })
 
-        /*await client.sendMessage(
+        await client.sendMessage(
           m.chat,
           {
             document: { url: dl },
@@ -110,15 +110,7 @@ const tipo = mimeTypes[ext.toLowerCase()] || 'application/octet-stream';
             fileName: title,
           },
           { quoted: m },
-        )*/
-
-        let jpegThumbnail2 = await getBuffer(`https://cdn.stellarwa.xyz/files/1755745696353.jpeg`)
-        let jpegThumbnail = await sharp(jpegThumbnail2)
-    .resize(300, 300)
-    .jpeg({ quality: 80 })
-    .toBuffer();
-
-    await client.sendMessage(m.chat, { document: { url: dl }, mimetype: tipo, fileName: title, jpegThumbnail }, { quoted: m });
+        )
     } catch (e) {
       m.reply(msgglobal)
     }
