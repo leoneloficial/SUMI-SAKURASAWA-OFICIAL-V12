@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { execSync } from 'child_process'
+import path from 'path'
 
 export default {
 command: ['sticker', 's'],
@@ -7,7 +8,6 @@ category: 'utils',
 run: async (client, m) => {
 
 try {
-let media
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 
@@ -17,10 +17,15 @@ let text1 = user.metadatos || `S'ᴛᴇʟʟᴀʀ 🧠 WᴀBᴏᴛ`;
 let text2 = user.metadatos2 || `@${name}`;
 
 if (mime === 'image/webp') {
-    media = await quoted.download()
+    const media = await quoted.download()
 
-    let tmpMp4 = './tmp_sticker.mp4'
-    execSync(`ffmpeg -i ${media} -movflags faststart -pix_fmt yuv420p ${tmpMp4}`)
+
+    const tmpWebp = path.join(process.cwd(), 'tmp_input.webp')
+    const tmpMp4 = path.join(process.cwd(), 'tmp_output.mp4')
+
+    fs.writeFileSync(tmpWebp, media)
+
+    execSync(`ffmpeg -y -i "${tmpWebp}" -movflags faststart -pix_fmt yuv420p "${tmpMp4}"`)
 
     let encmedia = await client.sendVideoAsSticker(
         m.chat,
@@ -29,14 +34,16 @@ if (mime === 'image/webp') {
         { packname: text1, author: text2 }
     )
 
+    fs.unlinkSync(tmpWebp)
     fs.unlinkSync(tmpMp4)
+
     return
 }
 
 if (/image/.test(mime)) {
-    media = await quoted.download()
+    const media = await quoted.download()
     let encmedia = await client.sendImageAsSticker(m.chat, media, m, { packname: text1, author: text2 })
-    await fs.unlinkSync(encmedia)
+    fs.unlinkSync(encmedia)
     return
 }
 
@@ -45,10 +52,10 @@ if (/video/.test(mime)) {
         return m.reply('ꕥ El video no puede ser muy largo')
     }
 
-    media = await quoted.download()
+    const media = await quoted.download()
     let encmedia = await client.sendVideoAsSticker(m.chat, media, m, { packname: text1, author: text2 })
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    await fs.unlinkSync(encmedia)
+    await new Promise(r => setTimeout(r, 2000))
+    fs.unlinkSync(encmedia)
     return
 }
 
