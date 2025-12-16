@@ -38,7 +38,7 @@ export default {
 
 const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconocido"
 
-      let menu = `> @${m.sender.split('@')[0]} *¡ʜᴏʟᴀ!* $sender, como está tu día?, mucho gusto mi nombre es *$namebot*
+      let menu = `> *¡ʜᴏʟᴀ!* $sender, como está tu día?, mucho gusto mi nombre es *$namebot*
 
 *┏━ ${botname} ━⊜*
 ┃⋄ 📅 *Fecha* :: $tiempo, $tiempo2
@@ -304,7 +304,7 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
             gifPlayback: true,
             caption: menu,
             contextInfo: {
-              mentionedJid: [owner, m.sender],
+              mentionedJid: [owner],
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
                 newsletterJid: canalId,
@@ -321,7 +321,7 @@ const time = client.uptime ? formatearMs(Date.now() - client.uptime) : "Desconoc
           {
             text: menu,
             contextInfo: {
-              mentionedJid: [owner, m.sender],
+              mentionedJid: [owner],
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
                 newsletterJid: canalId,
