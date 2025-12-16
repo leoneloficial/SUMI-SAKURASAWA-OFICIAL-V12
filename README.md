@@ -10,14 +10,6 @@
 
 ---
 
-<div align="center">
-
-[![](https://moe-counter.glitch.me/get/@:api.stellarwa.xyz?theme=booru-jaypee)](https://bot.stellarwa.xyz)
-
-</div>
-
----
-
 ## 🪾 Descripción 
 
 Alya Bot es un bot de WhatsApp multifuncional basado en `baileys`. Este bot ofrece una variedad de características para mejorar tu experiencia en WhatsApp.
