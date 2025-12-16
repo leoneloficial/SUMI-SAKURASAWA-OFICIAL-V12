@@ -241,7 +241,7 @@ console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n${
     }
 
     if (connection == "open") {
-      client.uptime = Date.now();
+      // client.uptime = Date.now();
  console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
     }
 
