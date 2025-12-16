@@ -10,17 +10,6 @@ export default async (client, m) => {
       const botId = client.user.id.split(':')[0] + '@s.whatsapp.net'
       const primaryBotId = chat?.primaryBot
 
-      const now = new Date()
-      const colombianTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Bogota' }))
-      const tiempo = colombianTime.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      }).replace(/,/g, '')
-      const tiempo2 = moment.tz('America/Bogota').format('hh:mm A')
-
-      const memberCount = metadata.participants.length
-
       for (const p of anu.participants) {
         const jid = p.phoneNumber
         const phone = p.phoneNumber?.split('@')[0] || jid.split('@')[0]
@@ -28,19 +17,13 @@ export default async (client, m) => {
 
         const fakeContext = {
           contextInfo: {
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: global.db.data.settings[botId].id,
-              serverMessageId: '0',
-              newsletterName: global.db.data.settings[botId].nameid
-            },
             externalAdReply: {
               title: global.db.data.settings[botId].namebot,
               body: dev,
               mediaUrl: null,
               description: null,
               previewType: 'PHOTO',
-              thumbnailUrl: global.db.data.settings[botId].icon,
+              thumbnailUrl: pp,
               sourceUrl: global.db.data.settings[client.user.id.split(':')[0] + "@s.whatsapp.net"].link,
               mediaType: 1,
               renderLargerThumbnail: false
@@ -50,30 +33,13 @@ export default async (client, m) => {
         }
 
         if (anu.action === 'add' && chat?.welcome && (!primaryBotId || primaryBotId === botId)) {
-          const caption = `╭┈──̇─̇─̇────̇─̇─̇──◯◝
-┊「 *Bienvenido (⁠ ⁠ꈍ⁠ᴗ⁠ꈍ⁠)* 」
-┊︶︶︶︶︶︶︶︶︶︶︶
-┊  *Usuario ›* @${phone}
-┊  *Grupo ›* ${metadata.subject}
-┊┈─────̇─̇─̇─────◯◝
-┊➤ *Usa /menu para ver los comandos.*
-┊➤ *Ahora somos ${memberCount} miembros.*
-┊ ︿︿︿︿︿︿︿︿︿︿︿
-╰─────────────────╯`
-          await client.sendMessage(anu.id, { image: { url: pp }, caption, ...fakeContext })
+  const caption = `🦩 Welcome!!! @${phone}`
+          await client.reply(m.chat, caption, m, fakeContext)
         }
 
         if ((anu.action === 'remove' || anu.action === 'leave') && chat?.welcome && (!primaryBotId || primaryBotId === botId)) {
-          const caption = `╭┈──̇─̇─̇────̇─̇─̇──◯◝
-┊「 *Hasta pronto (⁠╥⁠﹏⁠╥⁠)* 」
-┊︶︶︶︶︶︶︶︶︶︶︶
-┊  *Nombre ›* @${phone}
-┊┈─────̇─̇─̇─────◯◝
-┊➤ *Ojalá que vuelva pronto.*
-┊➤ *Ahora somos ${memberCount} miembros.*
-┊ ︿︿︿︿︿︿︿︿︿︿︿
-╰─────────────────╯`
-          await client.sendMessage(anu.id, { image: { url: pp }, caption, ...fakeContext })
+          const caption = `🦩 Adiós!!! @${phone}`
+          await client.reply(m.chat, caption, m, fakeContext)
         }
 
         if (anu.action === 'promote' && chat?.alerts && (!primaryBotId || primaryBotId === botId)) {
