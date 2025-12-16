@@ -138,7 +138,9 @@ if (botprimaryId && botprimaryId !== selfId) {
     if ((primaryConn && primaryInGroup) || isPrimarySelf) return
   }
 }
-
+ 
+ if ((m.id.startsWith("3EB0") || (m.id.startsWith("BAE5") && m.id.length === 16) || (m.id.startsWith("B24E") && m.id.length === 20))) return
+ 
   const isVotOwn = [
     client.user.id.split(':')[0] + '@s.whatsapp.net',
     ...global.owner.map(num => num + '@s.whatsapp.net')
