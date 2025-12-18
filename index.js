@@ -175,17 +175,18 @@ async function startBot() {
   client.isInit = false
   client.ev.on("creds.update", saveCreds)
 
+  let phoneNumber, fixed, pairing
   if (!client.authState.creds.registered) {
 console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.")}\n${chalk.bold.yellowBright("Ejemplo: +57301******")}\n${chalk.bold.magentaBright('---> ')} `))
-        const fixed = await question("")
-        const phoneNumber = normalizePhoneForPairing(fixed);
+        fixed = await question("")
+        phoneNumber = normalizePhoneForPairing(fixed);
     try {
-      const pairing = await client.requestPairingCode(phoneNumber)
+        pairing = await client.requestPairingCode(phoneNumber)
       console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)))
     } catch (err) {
-        const fixed = await question("")
-        const phoneNumber = normalizePhoneForPairing(fixed);
-      const pairing = await client.requestPairingCode(phoneNumber)
+        fixed = await question("")
+        phoneNumber = normalizePhoneForPairing(fixed);
+        pairing = await client.requestPairingCode(phoneNumber)
       console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)))
     }
   }
