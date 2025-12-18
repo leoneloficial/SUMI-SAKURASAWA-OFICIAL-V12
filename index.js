@@ -54,14 +54,6 @@ const log = {
     console.log(chalk.bgRed.white.bold(`ERROR`), chalk.redBright(msg)),
 };
 
-/*const print = (label, value) =>
-  console.log(
-    `${chalk.green.bold("║")} ${chalk.cyan.bold(label.padEnd(16))}${chalk.magenta.bold(":")} ${value}`,
-  );
-const pairingCode = process.argv.includes("--qr")
-  ? false
-  : process.argv.includes("--pairing-code") || global.pairing_code; */
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
