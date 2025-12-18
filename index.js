@@ -54,24 +54,23 @@ const log = {
     console.log(chalk.bgRed.white.bold(`ERROR`), chalk.redBright(msg)),
 };
 
-const print = (label, value) =>
+/*const print = (label, value) =>
   console.log(
     `${chalk.green.bold("║")} ${chalk.cyan.bold(label.padEnd(16))}${chalk.magenta.bold(":")} ${value}`,
   );
 const pairingCode = process.argv.includes("--qr")
   ? false
-  : process.argv.includes("--pairing-code") || global.pairing_code;
+  : process.argv.includes("--pairing-code") || global.pairing_code; */
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-const question = (text) => {
-  return new Promise((resolve) => {
-    rl.question(text, (answer) => {
-      resolve(answer.trim());
-    });
-  });
+
+const askQuestion = async (text) => {
+  return new Promise(resolve => rl.question(text, answer => resolve(answer.trim())));
 };
+
 const usePairingCode = true;
 
 const userInfoSyt = () => {
