@@ -146,6 +146,14 @@ async function loadBots() {
   await loadBots()
 })()
 
+const isValidPhoneNumber = (input) => /^[0-9\s\+\-\(\)]+$/.test(input);
+
+const displayLoadingMessage = () => {
+  console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n` +
+      `${chalk.bold.yellowBright("Ejemplo: +57301******")}\n` +
+      `${chalk.bold.magentaBright('---> ')} `));
+};
+
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState(global.sessionName)
   const { version, isLatest } = await fetchLatestBaileysVersion();
@@ -176,15 +184,22 @@ async function startBot() {
   client.ev.on("creds.update", saveCreds)
 
   if (!client.authState.creds.registered) {
-console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.")}\n${chalk.bold.yellowBright("Ejemplo: +57301******")}\n${chalk.bold.magentaBright('---> ')} `))
-        const fixed = await question("")
-        const phoneNumber = normalizePhoneForPairing(fixed);
-    try {
-      const pairing = await client.requestPairingCode(phoneNumber)
-      console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)))
-    } catch (err) {
+    while (true) {
+      try {
+        displayLoadingMessage();
+        const phoneInput = await askQuestion("");
+        if (isValidPhoneNumber(phoneInput)) {
+          const phoneNumber = normalizePhoneForPairing(phoneInput);
+          const pairing = await client.requestPairingCode(phoneNumber);
+          console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)));
+          break;
+        } else {
+          log.error("Error: por favor ingrese un número válido.");
+        }
+      } catch (err) {
       exec("rm -rf ./Sessions/Owner/*")
       process.exit(1)
+      }
     }
   }
 
