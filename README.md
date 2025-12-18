@@ -111,9 +111,10 @@ npm start
 ### 🐢 Enlaces Principales
 | Servicio | Enlace |
 |------------|-----------|
-| Soporte | [Visitar](https://api.stellarwa.xyz/ticket) |
 | Dashboard | [Abrir](https://api.stellarwa.xyz) |
-| Store | [Abrir](https://api.stellarwa.xyz/store) |
+| Store | [Abrir](https://api.stellarwa.xyz/store) 
+| Soporte | [Visitar](https://api.stellarwa.xyz/ticket) 
+| Terminos | [Ver](https://stellarwa.xyz/terms) 
 | Estado de Servicios | [Ver](https://stellarwa.xyz/status) 
 
 </details>
