@@ -175,22 +175,52 @@ async function startBot() {
   client.isInit = false
   client.ev.on("creds.update", saveCreds)
 
-  let phoneNumber, fixed, pairing
-  if (!client.authState.creds.registered) {
-console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.")}\n${chalk.bold.yellowBright("Ejemplo: +57301******")}\n${chalk.bold.magentaBright('---> ')} `))
-        fixed = await question("")
-        phoneNumber = normalizePhoneForPairing(fixed);
-    try {
-        pairing = await client.requestPairingCode(phoneNumber)
-      console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)))
-    } catch (err) {
-console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.")}\n${chalk.bold.yellowBright("Ejemplo: +57301******")}\n${chalk.bold.magentaBright('---> ')} `))
-        fixed = await question("")
-        phoneNumber = normalizePhoneForPairing(fixed);
-        pairing = await client.requestPairingCode(phoneNumber)
-      console.log(chalk.bold.white(chalk.bgMagenta(`🦩  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)))
+const phoneRegex = /^[0-9+\-()\s]+$/;
+
+async function askPhoneNumber() {
+  let fixed;
+  while (true) {
+    console.log(
+      chalk.bold.redBright(
+        `Por favor, Ingrese el número de WhatsApp.\n` +
+        chalk.bold.yellowBright("CONSEJO: Copie el número de WhatsApp y péguelo en la consola.") + "\n" +
+        chalk.bold.yellowBright("Ejemplo: +57301******") + "\n" +
+        chalk.bold.magentaBright("---> ")
+      )
+    );
+
+    fixed = await question("");
+
+    if (!phoneRegex.test(fixed)) {
+      console.log(
+        chalk.bold.redBright("⚠️ Entrada inválida. Solo se permiten números.")
+      );
+      continue; 
     }
+
+    return fixed;
   }
+}
+
+if (!client.authState.creds.registered) {
+  try {
+    const fixed = await askPhoneNumber();
+    const phoneNumber = normalizePhoneForPairing(fixed);
+    const pairing = await client.requestPairingCode(phoneNumber);
+    console.log(
+      chalk.bold.white(chalk.bgMagenta("🪶  CÓDIGO DE VINCULACIÓN:")),
+      chalk.bold.white(pairing)
+    );
+  } catch (err) {
+    const fixed = await askPhoneNumber();
+    const phoneNumber = normalizePhoneForPairing(fixed);
+    const pairing = await client.requestPairingCode(phoneNumber);
+    console.log(
+      chalk.bold.white(chalk.bgMagenta("🦩  CÓDIGO DE VINCULACIÓN:")),
+      chalk.bold.white(pairing)
+    );
+  }
+}
 
   client.sendText = (jid, text, quoted = "", options) =>
     client.sendMessage(jid, { text: text, ...options }, { quoted })
