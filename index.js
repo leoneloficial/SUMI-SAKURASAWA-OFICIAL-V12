@@ -27,6 +27,7 @@ import pino from "pino";
 import chalk from "chalk";
 import fs from "fs";
 import path from "path";
+import readlineSync from "readline-sync";
 import boxen from 'boxen';
 import readline from "readline";
 import { smsg } from "./lib/message.js";
@@ -49,8 +50,7 @@ const log = {
     console.log(chalk.bgRed.white.bold(`ERROR`), chalk.redBright(msg)),
 };
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-const askQuestion = (texto) => new Promise((resolver) => rl.question(texto, resolver))
+const askQuestion = readlineSync
 let usarCodigo = false;
 let numero = "";
 
