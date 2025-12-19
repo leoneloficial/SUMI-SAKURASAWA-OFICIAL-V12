@@ -143,7 +143,6 @@ const opcion = askQuestion.question(`╭${lineM}
 ┊ ${chalk.blueBright('┊')} ${chalk.italic.magenta('la opción para conectarse.')}
 ┊ ${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')} 
 ╰${lineM}\n${chalk.bold.magentaBright('---> ')}`)
-
 usarCodigo = opcion === "2";
 if (usarCodigo) {
 displayLoadingMessage()
@@ -238,6 +237,9 @@ async function startBot() {
       // client.uptime = Date.now();
  console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
     }
+
+process.on('uncaughtException', console.error);
+process.on('unhandledRejection', console.error);
 
 if (usarCodigo && !state.creds.registered) {
 setTimeout(async () => {
