@@ -162,8 +162,7 @@ async function startBot() {
   if (!client.authState.creds.registered) {
     while (true) {
       try {
-        displayLoadingMessage();
-        const phoneInput = await askQuestion("");
+        const phoneInput = await askQuestion(displayLoadingMessage());
         if (isValidPhoneNumber(phoneInput)) {
           const phoneNumber = normalizePhoneForPairing(phoneInput);
           const pairing = await client.requestPairingCode(phoneNumber);
