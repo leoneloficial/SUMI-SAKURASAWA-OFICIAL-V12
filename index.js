@@ -225,6 +225,15 @@ return console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACI�
 } catch {}
 }, 3000);
 }
+
+    if (isNewLogin) {
+      log.info("Nuevo dispositivo detectado")
+    }
+
+    if (receivedPendingNotifications == "true") {
+      log.warn("Por favor espere aproximadamente 1 minuto...")
+      client.ev.flush()
+    }
 })
 
   let m
