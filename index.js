@@ -171,6 +171,16 @@ async function startBot() {
       receivedPendingNotifications,
     } = update
 
+if (!state.creds.registered) {
+setTimeout(async () => {
+try {
+const pairing = await client.requestPairingCode(numero);
+const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
+return console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
+} catch {}
+}, 3000);
+}
+
     if (connection === "close") {
       const reason = lastDisconnect?.error?.output?.statusCode || 0;
       if (reason === DisconnectReason.connectionLost) {
@@ -215,16 +225,6 @@ async function startBot() {
       client.uptime = Date.now();
  console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
     }
-
-if (!state.creds.registered) {
-setTimeout(async () => {
-try {
-const pairing = await client.requestPairingCode(numero);
-const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
-return console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
-} catch {}
-}, 3000);
-}
 
     if (isNewLogin) {
       log.info("Nuevo dispositivo detectado")
