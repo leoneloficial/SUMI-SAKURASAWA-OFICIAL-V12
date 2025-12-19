@@ -162,7 +162,8 @@ async function startBot() {
           rl.close()
           setTimeout(async () => {
           const phoneNumber = normalizePhoneForPairing(phoneInput);
-          const pairing = await client.requestPairingCode(phoneNumber);
+          let pairing = await client.requestPairingCode(phoneNumber);
+          pairing = pairing?.match(/.{1,4}/g)?.join("-") || pairing
           console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(pairing)));
           }, 3000)
           break;
