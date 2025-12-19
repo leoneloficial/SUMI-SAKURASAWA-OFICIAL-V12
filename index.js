@@ -53,6 +53,7 @@ const log = {
 const askQuestion = readlineSync
 let usarCodigo = false;
 let numero = "";
+let phoneInput = "";
 
   const DIGITS = (s = "") => String(s).replace(/\D/g, "");
 
@@ -146,9 +147,8 @@ const opcion = askQuestion.question(`╭${lineM}
 usarCodigo = opcion === "2";
 if (usarCodigo) {
 displayLoadingMessage()
-numero = askQuestion.question("").replace(/[^0-9]/g, '');
-if (numero.startsWith('52') && !numero.startsWith('521')) {
-numero = '521' + numero.slice(2);
+phoneInput = askQuestion.question("")
+numero = normalizePhoneForPairing(phoneInput)
 }}
 }
 
