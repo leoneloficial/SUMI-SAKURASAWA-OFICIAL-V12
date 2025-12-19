@@ -10,10 +10,10 @@
  # ------------- √ × -------------
 */
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
-import "./settings.js"
-import handler from './handler.js'
-import events from './commands/events.js'
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
+import "./settings.js";
+import handler from './handler.js';
+import events from './commands/events.js';
 import {
   Browsers,
   makeWASocket,
@@ -33,7 +33,7 @@ import readline from "readline";
 import { smsg } from "./lib/message.js";
 import db from "./lib/system/database.js";
 import { startSubBot } from './lib/subs.js';
-import { exec, execSync } from "child_process";
+import { exec } from "child_process";
 
 const log = {
   info: (msg) => console.log(chalk.bgBlue.white.bold(`INFO`), chalk.white(msg)),
@@ -67,7 +67,6 @@ function normalizePhoneForPairing(input) {
 }
 
 const { say } = cfonts;
-
 say('alya san', {
   align: 'center',
   gradient: ['red', 'blue']
@@ -78,36 +77,9 @@ say('WhatsApp Bot', {
   gradient: ['blue', 'magenta']
 });
 
-/*const BOT_TYPES = [
-  { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
-](global.conns) = global.conns || []
-const reconnecting = new Set();
-
-async function loadBots() {
-  for (const { name, folder, starter } of BOT_TYPES) {
-    if (!fs.existsSync(folder)) continue;
-    const botIds = fs.readdirSync(folder);
-    for (const userId of botIds) {
-      const sessionPath = path.join(folder, userId);
-      const credsPath = path.join(sessionPath, 'creds.json');
-      if (!fs.existsSync(credsPath)) continue;
-      if (global.conns.some((conn) => conn.userId === userId)) continue;
-      if (reconnecting.has(userId)) continue;
-      try {
-        reconnecting.add(userId);
-        await starter(null, null, 'Auto reconexión', false, userId, sessionPath);
-      } catch (e) {
-        reconnecting.delete(userId);
-      }
-      await new Promise((res) => setTimeout(res, 2500));
-    }
-  }
-  setTimeout(loadBots, 60 * 1000);
-}
-
-(async () => {
-  await loadBots();
-})();*/
+let phoneNumber = globalThis.botNumber;
+const methodCodeQR = process.argv.includes("qr");
+const methodCode = !!phoneNumber || process.argv.includes("code");
 
 const isValidPhoneNumber = (input) => /^[0-9\s\+\-\(\)]+$/.test(input);
 
@@ -136,7 +108,7 @@ async function startBot() {
   const clientt = makeWASocket({
     version,
     logger,
-    printQRInTerminal: opcion === '1',
+    printQRInTerminal: opcion === '1' || methodCodeQR,
     browser: Browsers.macOS('Chrome'),
     auth: {
       creds: state.creds,
@@ -234,6 +206,15 @@ async function startBot() {
     if (receivedPendingNotifications === "true") {
       log.warn("Por favor espere aproximadamente 1 minuto...");
       client.ev.flush();
+    }
+
+    if ((update.qr && update.qr !== 0) || methodCodeQR) {
+      if (opcion === '1' || methodCodeQR) {
+        console.log(chalk.green.bold(`
+╭───────────────────╼
+│ ${chalk.cyan("Escanea este código QR para conectarte.")}
+╰───────────────────╼`));
+      }
     }
   });
 
