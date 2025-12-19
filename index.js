@@ -40,12 +40,7 @@ const log = {
   success: (msg) =>
     console.log(chalk.bgGreen.white.bold(`SUCCESS`), chalk.greenBright(msg)),
   warn: (msg) =>
-    console.log(
-      chalk.bgYellowBright.blueBright.bold(`WARNING`),
-      chalk.yellow(msg),
-    ),
-  warning: (msg) =>
-    console.log(chalk.bgYellowBright.red.bold(`WARNING`), chalk.yellow(msg)),
+    console.log(chalk.bgYellowBright.blueBright.bold(`WARNING`), chalk.yellow(msg)),
   error: (msg) =>
     console.log(chalk.bgRed.white.bold(`ERROR`), chalk.redBright(msg)),
 };
@@ -53,41 +48,39 @@ const log = {
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const askQuestion = (texto) => new Promise((resolver) => rl.question(texto, resolver))
 
-  const DIGITS = (s = "") => String(s).replace(/\D/g, "");
+const DIGITS = (s = "") => String(s).replace(/\D/g, "");
 
-  function normalizePhoneForPairing(input) {
-    let s = DIGITS(input);
-    if (!s) return "";
-    if (s.startsWith("0")) s = s.replace(/^0+/, "");
-    if (s.length === 10 && s.startsWith("3")) {
-      s = "57" + s;
-    }
-    if (s.startsWith("52") && !s.startsWith("521") && s.length >= 12) {
-      s = "521" + s.slice(2);
-    }
-    if (s.startsWith("54") && !s.startsWith("549") && s.length >= 11) {
-      s = "549" + s.slice(2);
-    }
-    return s;
+function normalizePhoneForPairing(input) {
+  let s = DIGITS(input);
+  if (!s) return "";
+  if (s.startsWith("0")) s = s.replace(/^0+/, "");
+  if (s.length === 10 && s.startsWith("3")) {
+    s = "57" + s;
   }
+  if (s.startsWith("52") && !s.startsWith("521") && s.length >= 12) {
+    s = "521" + s.slice(2);
+  }
+  if (s.startsWith("54") && !s.startsWith("549") && s.length >= 11) {
+    s = "549" + s.slice(2);
+  }
+  return s;
+}
 
 const { say } = cfonts
 
 say('alya san', {
-align: 'center',           
-gradient: ['red', 'blue'] 
+  align: 'center',           
+  gradient: ['red', 'blue'] 
 })
 say('WhatsApp Bot', {
-font: 'console',
-align: 'center',
-gradient: ['blue', 'magenta']
+  font: 'console',
+  align: 'center',
+  gradient: ['blue', 'magenta']
 })
 
 const BOT_TYPES = [
   { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
-]
-
-global.conns = global.conns || []
+](global.conns) = global.conns || []
 const reconnecting = new Set()
 
 async function loadBots() {
@@ -104,7 +97,6 @@ async function loadBots() {
         reconnecting.add(userId)
         await starter(null, null, 'Auto reconexión', false, userId, sessionPath)
       } catch (e) {
-        // console.log(chalk.gray(`[ ✿  ]  Falló la carga de ${userId} (${name})`))
         reconnecting.delete(userId)
       }
       await new Promise((res) => setTimeout(res, 2500))
@@ -136,7 +128,6 @@ async function startBot() {
     version,
     logger,
     printQRInTerminal: false,
-  //  browser: ['Windows', 'Chrome'],
     browser: Browsers.macOS('Chrome'),
     auth: {
       creds: state.creds,
@@ -154,18 +145,26 @@ async function startBot() {
   client.isInit = false
   client.ev.on("creds.update", saveCreds)
 
-if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
-  if (!client.authState.creds.registered) {
-    while (true) {
-      displayLoadingMessage()
+  if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
+    let opcion;
+    do {
+      opcion = await askQuestion(chalk.bold.yellowBright("Seleccione una opción:\n") +
+        chalk.bold.greenBright("1. Con código QR\n") +
+        chalk.bold.blueBright("2. Con código de texto de 8 dígitos\n" +
+        "--> "));
+    } while (!/^[1-2]$/.test(opcion));
+
+    if (opcion === '2' || !client.authState.creds.registered) {
+      while (true) {
+        displayLoadingMessage()
         const phoneInput = await askQuestion("");
         if (isValidPhoneNumber(phoneInput)) {
           rl.close()
           setTimeout(async () => {
-          const phoneNumber = normalizePhoneForPairing(phoneInput);
-          const pairing = await client.requestPairingCode(phoneNumber);
-          const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
-          console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
+            const phoneNumber = normalizePhoneForPairing(phoneInput);
+            const pairing = await client.requestPairingCode(phoneNumber);
+            const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
+            console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
           }, 3000)
           break;
         } else {
@@ -190,9 +189,7 @@ if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
     if (connection === "close") {
       const reason = lastDisconnect?.error?.output?.statusCode || 0;
       if (reason === DisconnectReason.connectionLost) {
-        log.warning(
-          "Se perdió la conexión al servidor, intento reconectarme..",
-        )
+        log.warning("Se perdió la conexión al servidor, intento reconectarme..")
         startBot()
       } else if (reason === DisconnectReason.connectionClosed) {
         log.warning("Conexión cerrada, intentando reconectarse...")
@@ -221,17 +218,13 @@ if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
         exec("rm -rf ./Sessions/Owner/*")
         process.exit(0)
       } else {
-        client.end(
-          `Motivo de desconexión desconocido : ${reason}|${connection}`,
-        )
+        client.end(`Motivo de desconexión desconocido : ${reason}|${connection}`)
       }
     }
 
     if (connection == "open") {
-      // client.uptime = Date.now();
- console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
+      console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
     }
-
 
     if (isNewLogin) {
       log.info("Nuevo dispositivo detectado")
@@ -263,9 +256,9 @@ if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
   })
 
   try {
-  await events(client, m)
+    await events(client, m)
   } catch (err) {
-   console.log(chalk.gray(`[ BOT  ]  → ${err}`))
+    console.log(chalk.gray(`[ BOT  ]  → ${err}`))
   }
 
   client.decodeJid = (jid) => {
@@ -281,7 +274,7 @@ if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
 }
 
 (async () => {
-    global.loadDatabase()
-    console.log(chalk.gray('[ ✿  ]  Base de datos cargada correctamente.'))
+  global.loadDatabase()
+  console.log(chalk.gray('[ ✿  ]  Base de datos cargada correctamente.'))
   await startBot()
 })()
