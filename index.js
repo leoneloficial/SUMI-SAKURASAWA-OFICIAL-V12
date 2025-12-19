@@ -10,7 +10,6 @@
  # ------------- √ × -------------
 */
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import "./settings.js"
 import handler from './handler.js'
 import events from './commands/events.js'
@@ -117,13 +116,37 @@ async function loadBots() {
   await loadBots()
 })()
 
-const isValidPhoneNumber = (input) => /^[0-9\s\+\-\(\)]+$/.test(input);
-
 const displayLoadingMessage = () => {
   console.log(chalk.bold.redBright(`Por favor, Ingrese el número de WhatsApp.\n` +
       `${chalk.bold.yellowBright("Ejemplo: +57301******")}\n` +
       `${chalk.bold.magentaBright('---> ')} `));
 };
+
+if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
+let lineM = '⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ ⋯ 》'
+const opcion = readlineSync.question(`╭${lineM}  
+┊ ${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┊ ${chalk.blueBright('┊')} ${chalk.blue.bgBlue.bold.cyan('MÉTODO DE VINCULACIÓN')}
+┊ ${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}   
+┊ ${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}     
+┊ ${chalk.blueBright('┊')} ${chalk.green.bgMagenta.bold.yellow('¿CÓMO DESEA CONECTARSE?')}
+┊ ${chalk.blueBright('┊')} ${chalk.bold.redBright('⇢  Opción 1:')} ${chalk.greenBright('Código QR.')}
+┊ ${chalk.blueBright('┊')} ${chalk.bold.redBright('⇢  Opción 2:')} ${chalk.greenBright('Código de 8 digitos.')}
+┊ ${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}
+┊ ${chalk.blueBright('╭┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')}     
+┊ ${chalk.blueBright('┊')} ${chalk.italic.magenta('Escriba sólo el número de')}
+┊ ${chalk.blueBright('┊')} ${chalk.italic.magenta('la opción para conectarse.')}
+┊ ${chalk.blueBright('╰┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅')} 
+╰${lineM}\n${chalk.bold.magentaBright('---> ')}`)
+
+usarCodigo = opcion === "2";
+if (usarCodigo) {
+displayLoadingMessage()
+numero = readlineSync.question("").replace(/[^0-9]/g, '');
+if (numero.startsWith('52') && !numero.startsWith('521')) {
+numero = '521' + numero.slice(2);
+}}
+}
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState(global.sessionName)
@@ -135,7 +158,7 @@ async function startBot() {
   const clientt = makeWASocket({
     version,
     logger,
-    printQRInTerminal: false,
+    printQRInTerminal: !usarCodigo && !fs.existsSync(BOT_CREDS_PATH),
   //  browser: ['Windows', 'Chrome'],
     browser: Browsers.macOS('Chrome'),
     auth: {
@@ -153,27 +176,6 @@ async function startBot() {
   global.client = clientt;
   client.isInit = false
   client.ev.on("creds.update", saveCreds)
-
-if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
-  if (!client.authState.creds.registered) {
-    while (true) {
-      displayLoadingMessage()
-        const phoneInput = await askQuestion("");
-        if (isValidPhoneNumber(phoneInput)) {
-          rl.close()
-          setTimeout(async () => {
-          const phoneNumber = normalizePhoneForPairing(phoneInput);
-          const pairing = await client.requestPairingCode(phoneNumber);
-          const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
-          console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
-          }, 3000)
-          break;
-        } else {
-          log.error("Error: por favor ingrese un número válido.");
-        }
-      } 
-    }
-  }
 
   client.sendText = (jid, text, quoted = "", options) =>
     client.sendMessage(jid, { text: text, ...options }, { quoted })
@@ -232,16 +234,14 @@ if (!fs.existsSync(`./Sessions/Owner/creds.json`)) {
  console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: 'center', float: 'center' }))
     }
 
-
-    if (isNewLogin) {
-      log.info("Nuevo dispositivo detectado")
-    }
-
-    if (receivedPendingNotifications == "true") {
-      log.warn("Por favor espere aproximadamente 1 minuto...")
-      client.ev.flush()
-    }
-  });
+if (usarCodigo && !state.creds.registered) {
+setTimeout(async () => {
+try {
+const code = await client.requestPairingCode(numero);
+console.log(chalk.yellow('Código de emparejamiento:'), chalk.greenBright(code));
+} catch {}
+}, 2000);
+}
 
   let m
   client.ev.on("messages.upsert", async ({ messages }) => {
