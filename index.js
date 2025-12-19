@@ -49,14 +49,8 @@ const log = {
     console.log(chalk.bgRed.white.bold(`ERROR`), chalk.redBright(msg)),
 };
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-const askQuestion = async (text) => {
-  return new Promise(resolve => rl.question(text, answer => resolve(answer.trim())));
-};
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const askQuestion = (texto) => new Promise((resolver) => rl.question(texto, resolver))
 
   const DIGITS = (s = "") => String(s).replace(/\D/g, "");
 
