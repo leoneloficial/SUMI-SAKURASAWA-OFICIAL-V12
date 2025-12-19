@@ -140,7 +140,7 @@ async function startBot() {
   const clientt = makeWASocket({
     version,
     logger,
-    printQRInTerminal: !usarCodigo && !fs.existsSync(BOT_CREDS_PATH),
+    printQRInTerminal: false,
   //  browser: ['Windows', 'Chrome'],
     browser: Browsers.macOS('Chrome'),
     auth: {
