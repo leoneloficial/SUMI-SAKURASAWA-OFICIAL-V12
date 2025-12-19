@@ -217,7 +217,7 @@ async function startBot() {
     }
 
 if (!state.creds.registered) {
-  async function generarCodigo(indice) {
+  async function generarCodigo() {
     try {
       const pairing = await client.requestPairingCode(numero);
       const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing;
@@ -227,7 +227,7 @@ if (!state.creds.registered) {
       );
     } catch {}
   }
-  generarCodigo(1);
+  await generarCodigo();
 }
 })
 
