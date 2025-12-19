@@ -217,17 +217,13 @@ async function startBot() {
     }
 
 if (!state.creds.registered) {
-  async function generarCodigo() {
-    try {
-      const pairing = await client.requestPairingCode(numero);
-      const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing;
-      console.log(
-        chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)),
-        chalk.bold.white(chalk.white(codeBot))
-      );
-    } catch {}
-  }
-  await generarCodigo();
+setTimeout(async () => {
+try {
+const pairing = await client.requestPairingCode(numero);
+const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing
+return console.log(chalk.bold.white(chalk.bgMagenta(`🪶  CÓDIGO DE VINCULACIÓN:`)), chalk.bold.white(chalk.white(codeBot)));
+} catch {}
+}, 3000);
 }
 })
 
