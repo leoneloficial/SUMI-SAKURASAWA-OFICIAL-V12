@@ -60,10 +60,13 @@ async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState(global.sessionName);
   const { version } = await fetchLatestBaileysVersion();
   const logger = pino({ level: "silent" });
+  const MethodMobile = process.argv.includes("mobile")
 
   const clientt = makeWASocket({
     version,
     logger,
+    printQRInTerminal: opcion == '1' ? true : false,
+    mobile: MethodMobile, 
     browser: Browsers.macOS('Chrome'),
     auth: {
       creds: state.creds,
