@@ -78,7 +78,7 @@ say('WhatsApp Bot', {
   gradient: ['blue', 'magenta']
 });
 
-const BOT_TYPES = [
+/*const BOT_TYPES = [
   { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
 ](global.conns) = global.conns || []
 const reconnecting = new Set();
@@ -107,7 +107,7 @@ async function loadBots() {
 
 (async () => {
   await loadBots();
-})();
+})();*/
 
 const isValidPhoneNumber = (input) => /^[0-9\s\+\-\(\)]+$/.test(input);
 
