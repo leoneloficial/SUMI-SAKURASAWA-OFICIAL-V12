@@ -14,19 +14,19 @@ export default {
     }
 
     try {
+      const keys = api.key
       const res = await axios.get(`${api.url}/dl/facebookv2`, {
         params: {
-          url: encodeURIComponent(args[0]),
-          key: 'ZyxlJs'
+          url: args[0], 
+          key: keys
         }
       })
 
       const json = res.data
       const results = json?.data?.results?.filter(v => v.url && v.quality)
 
-      m.reply(results)
       if (!json.status || !results || results.length === 0) {
-        return m.reply(`ꕥ No se pudo obtener el *video*\n${results}`)
+        return m.reply('ꕥ No se pudo obtener el *video*')
       }
 
       const best = results.find(v => v.quality.includes('1080')) || results[0]
@@ -44,7 +44,7 @@ export default {
         { quoted: m }
       )
     } catch (e) {
-      await m.reply('ꕥ Error: ' + e.message)
+      await m.reply(msgglobal + e)
     }
   }
 }
