@@ -24,6 +24,7 @@ export default {
       const json = res.data
       const results = json?.data?.results?.filter(v => v.url && v.quality)
 
+      m.reply(results)
       if (!json.status || !results || results.length === 0) {
         return m.reply('ꕥ No se pudo obtener el *video*')
       }
