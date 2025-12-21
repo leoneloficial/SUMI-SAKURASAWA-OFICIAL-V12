@@ -26,7 +26,7 @@ export default {
 
       m.reply(results)
       if (!json.status || !results || results.length === 0) {
-        return m.reply('ꕥ No se pudo obtener el *video*')
+        return m.reply(`ꕥ No se pudo obtener el *video*\n${results}`)
       }
 
       const best = results.find(v => v.quality.includes('1080')) || results[0]
