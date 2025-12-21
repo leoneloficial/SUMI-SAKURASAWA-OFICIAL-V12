@@ -46,7 +46,7 @@ export default {
         { quoted: m }
       )
     } catch (e) {
-      await m.reply(msgglobal)
+      await m.reply(msgglobal + e)
     }
   }
 }
