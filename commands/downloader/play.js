@@ -45,13 +45,21 @@ export default {
       }
 
       let result
+      let qu = ['92', '128', '255', '320'];
       let randomQuality = qu[Math.floor(Math.random() * qu.length)];
       try {
-        const res = await fetch(`${api.url}/dl/ytmp3?url=${encodeURIComponent(url)}&quality=92&key=${api.key}`)
+        const res = await fetch(`${api.url}/dl/ytmp3?url=${encodeURIComponent(url)}&quality=${randomQuality}&key=${api.key}`)
         result = await res.json()
         if (!result.status || !result.data || !result.data.dl) {
           throw new Error('Primera API falló')
         }
+      } catch {
+        try {
+          const fallback = await fetch(`${api.url}/dl/ytdl?url=${encodeURIComponent(url)}&format=mp3&key=${api.key}`)
+          result = await fallback.json()
+          if (!result.status || !result.data || !result.data.dl) {
+            return m.reply('《✧》 No se pudo descargar el *audio*, intenta mas tarde.')
+          }
         } catch {
           return m.reply('《✧》 No se pudo procesar el enlace. El servidor no respondió correctamente.')
         }
