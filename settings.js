@@ -26,7 +26,7 @@ globalThis.dev = '☄︎ ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴛᴇʟʟᴀʀ'
 
 global.api = {
   url: 'https://api.stellarwa.xyz',
-  key: 'ApiKey'
+  key: 'ZyxlJs'
 }
 
 global.bot = {
