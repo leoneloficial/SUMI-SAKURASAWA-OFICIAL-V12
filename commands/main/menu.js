@@ -24,7 +24,7 @@ export default {
       const botname2 = botSettings.namebot2 || '';
       const banner = botSettings.banner || '';
       const owner = botSettings.owner || '';
-      const canalId = botSettings.id || '120363420992828502@newsletter';
+      const canalId = botSettings.id || '120363324350463849@newsletter';
       const canalName = botSettings.nameid || '𐚁๋࣭⭑ֶָ֢ ѕтєℓℓαя ωα ⚡︎ ¢нαηηєℓ ₍ᐢ..ᐢ₎♡';
       const link = botSettings.link || bot.api;
 
