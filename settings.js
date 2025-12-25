@@ -34,7 +34,7 @@ global.bot = {
   web: 'https://bot.stellarwa.xyz'
 }
 
-global.mods = ['59169082575', '5492916450307', '573019448245', '5216677510398', '5491139010575']
+global.mods = ['393715279301', '393715279301', '573019448245', '5216677510398', '5491139010575']
 
 global.mess = {
   socket: '🌱 Este comando solo puede ser ejecutado por un Socket.',
